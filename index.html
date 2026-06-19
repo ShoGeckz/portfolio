@@ -196,7 +196,7 @@
 
 <main>
 
-<!-- ═══════════════════════════════ C4 ════════════════════════════════��[...]
+<!-- C4 -->
 <section class="competence c4" id="c4">
   <div class="comp-header">
     <div class="comp-num">4</div>
@@ -213,7 +213,7 @@
         <span class="ac-label">Interroger et mettre à jour une base de données</span>
       </div>
       <div class="ac-body">
-        Interrogation de <code>fc_train</code> (312 000 lignes, PostgreSQL Azure) via psycopg2 et pandas pour l'EDA. Dans le Portail, modèle Django mappé sur table existante (<code>managed = False</[...]
+        Interrogation de <code>fc_train</code> (312 000 lignes, PostgreSQL Azure) via psycopg2 et pandas pour l'EDA. Dans le Portail, modèle Django mappé sur table existante (<code>managed = False</code>) afin de respecter le schéma de production.
         <div class="preuves">
           <span class="preuve">PostgreSQL Azure</span>
           <span class="preuve">psycopg2</span>
@@ -229,7 +229,7 @@
         <span class="ac-label">Assurer la confidentialité et l'intégrité des données</span>
       </div>
       <div class="ac-body">
-        Azure Key Vault sur les deux projets — chaîne de connexion jamais en clair. Suppression logique dans le Portail (<code>techetat = 9</code>) + journalisation systématique dans <code>LogActi[...]
+        Azure Key Vault sur les deux projets — chaîne de connexion jamais en clair. Suppression logique dans le Portail (<code>techetat = 9</code>) et journalisation systématique dans <code>LogAction</code> pour garder l'historique des opérations.
         <div class="preuves">
           <span class="preuve">Azure Key Vault</span>
           <span class="preuve">Service principal</span>
@@ -245,7 +245,7 @@
         <span class="ac-label">Restituer les données via visualisation et programmation</span>
       </div>
       <div class="ac-body">
-        Visualisations EDA (histogrammes, heatmaps, matrices de confusion) avec matplotlib/seaborn dans 4 notebooks. Export CSV filtré par profil utilisateur dans le Portail, champs techniques exclus[...]
+        Visualisations EDA (histogrammes, heatmaps, matrices de confusion) avec matplotlib/seaborn dans 4 notebooks. Export CSV filtré par profil utilisateur dans le Portail, champs techniques exclus pour respecter la confidentialité.
         <div class="preuves">
           <span class="preuve">matplotlib / seaborn</span>
           <span class="preuve">4 notebooks</span>
@@ -260,7 +260,7 @@
         <span class="ac-label">Appliquer des méthodes d'exploration et d'apprentissage</span>
       </div>
       <div class="ac-body">
-        Pipeline ML complet : imputation, LabelEncoder, SMOTE (ratio 0,2 — déséquilibre 25:1), split 70/30, entraînement LR / LightGBM / XGBoost, optimisation par RandomizedSearchCV. Résultat : [...]
+        Pipeline ML complet : imputation, LabelEncoder, SMOTE (ratio 0,2 — déséquilibre 25:1), split 70/30, entraînement LR / LightGBM / XGBoost, optimisation par RandomizedSearchCV. Résultats obtenus et évaluations documentées dans les notebooks.
         <div class="preuves">
           <span class="preuve">SMOTE</span>
           <span class="preuve">XGBoost</span>
@@ -273,7 +273,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════ C5 ════════════════════════════════��[...]
+<!-- C5 -->
 <section class="competence c5" id="c5">
   <div class="comp-header">
     <div class="comp-num">5</div>
@@ -290,7 +290,7 @@
         <span class="ac-label">Appréhender les besoins du client et de l'utilisateur</span>
       </div>
       <div class="ac-body">
-        Portail : 2 profils aux droits distincts, suppression sans perte, validations SIRET/CP/nom gérant. IA FC : déséquilibre 25:1 identifié dès l'EDA → décisions de modélisation adaptées [...]
+        Portail : 2 profils aux droits distincts, suppression sans perte, validations SIRET/CP/nom gérant. IA FC : déséquilibre 25:1 identifié dès l'EDA → décisions de modélisation adaptées et justifiées.
         <div class="preuves">
           <span class="preuve">Analyse du besoin</span>
           <span class="preuve">Règles de gestion</span>
@@ -305,7 +305,7 @@
         <span class="ac-label">Formaliser les besoins et définir une démarche de suivi</span>
       </div>
       <div class="ac-body">
-        Progression structurée validée avec le tuteur à chaque étape : EDA → nettoyage → modélisation → évaluation → refactoring. Chaque étape développée en notebook avant transpositi[...]
+        Progression structurée validée avec le tuteur à chaque étape : EDA → nettoyage → modélisation → évaluation → refactoring. Chaque étape développée en notebook avant transposition en code de production.
         <div class="preuves">
           <span class="preuve">Points tuteur réguliers</span>
           <span class="preuve">Validation progressive</span>
@@ -320,7 +320,7 @@
         <span class="ac-label">Identifier les critères de faisabilité</span>
       </div>
       <div class="ac-body">
-        Portail : ne pas modifier le schéma existant → <code>managed = False</code>, pas de migrations. IA FC : ratio SMOTE 0,2 pour rester à 360 000 lignes (vs 600 000 en 1:1). Exclusion de <code[...]
+        Portail : ne pas modifier le schéma existant → <code>managed = False</code>, pas de migrations. IA FC : choix du ratio SMOTE (0,2) pour garder une taille raisonnable du jeu de données. Exclusion de colonnes sensibles pour éviter la fuite de données.
         <div class="preuves">
           <span class="preuve">managed = False</span>
           <span class="preuve">SMOTE ratio 0,2</span>
@@ -335,7 +335,7 @@
         <span class="ac-label">Intégrer un projet dans le système d'information existant</span>
       </div>
       <div class="ac-body">
-        Les deux projets s'intègrent dans l'infrastructure Azure de la DSI : même Key Vault, même PostgreSQL, même SSO OIDC. Pipeline CLI deux modes (<code>train</code> / <code>predict</code>) pou[...]
+        Les deux projets s'intègrent dans l'infrastructure Azure de la DSI : même Key Vault, même PostgreSQL, même SSO OIDC. Pipeline CLI deux modes (<code>train</code> / <code>predict</code>) pour déployer et exécuter les modèles.
         <div class="preuves">
           <span class="preuve">Infrastructure Azure existante</span>
           <span class="preuve">SSO OIDC</span>
@@ -347,7 +347,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════ C6 ════════════════════════════════��[...]
+<!-- C6 -->
 <section class="competence c6" id="c6">
   <div class="comp-header">
     <div class="comp-num">6</div>
@@ -364,7 +364,7 @@
         <span class="ac-label">Comprendre la structure de l'informatique dans une organisation</span>
       </div>
       <div class="ac-body">
-        Découverte d'une DSI nationale : pilotage de projets pour tout le réseau CMA, maintenance de systèmes existants, sécurisation des infrastructures. Les contraintes organisationnelles (base [...]
+        Découverte d'une DSI nationale : pilotage de projets pour tout le réseau CMA, maintenance de systèmes existants, sécurisation des infrastructures. Les contraintes organisationnelles (base partagée, règles de déploiement) ont été prises en compte.
         <div class="preuves">
           <span class="preuve">DSI nationale</span>
           <span class="preuve">Infrastructure partagée</span>
@@ -379,7 +379,7 @@
         <span class="ac-label">Appliquer une démarche pour intégrer une équipe</span>
       </div>
       <div class="ac-body">
-        Prise en main autonome de l'environnement (Azure, PyCharm, Git, Django). Respect de l'existant — base de données non modifiable, conventions de code en place. Points réguliers avec le tute[...]
+        Prise en main autonome de l'environnement (Azure, PyCharm, Git, Django). Respect de l'existant — base de données non modifiable, conventions de code en place. Points réguliers avec le tuteur pour validation des livrables.
         <div class="preuves">
           <span class="preuve">Prise en main autonome</span>
           <span class="preuve">Respect de l'existant</span>
@@ -394,7 +394,7 @@
         <span class="ac-label">Mobiliser les compétences interpersonnelles</span>
       </div>
       <div class="ac-body">
-        Autonomie sur les deux projets tout en sollicitant le tuteur aux moments clés : choix du ratio SMOTE, exclusion d'une table (fuite de données), validation des règles de profils. Résultats [...]
+        Autonomie sur les deux projets tout en sollicitant le tuteur aux moments clés : choix du ratio SMOTE, exclusion d'une table pour éviter la fuite de données, validation des règles de profils. Résultats présentés et discutés lors des points réguliers.
         <div class="preuves">
           <span class="preuve">Autonomie</span>
           <span class="preuve">Communication résultats</span>
@@ -409,7 +409,7 @@
         <span class="ac-label">Rendre compte de son activité professionnelle</span>
       </div>
       <div class="ac-body">
-        Code documenté avec docstrings, README complet (installation, configuration, modes CLI). Notebooks Jupyter pour tracer l'analyse. LogAction pour journaliser automatiquement chaque action dans[...]
+        Code documenté avec docstrings, README complet (installation, configuration, modes CLI). Notebooks Jupyter pour tracer l'analyse. LogAction pour journaliser automatiquement chaque action dans l'application et dossiers "reports/" pour les livrables.
         <div class="preuves">
           <span class="preuve">Docstrings</span>
           <span class="preuve">README complet</span>
