@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio de stage — Mathis Sauquet</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dark: #1A1A2E;
+    --gris: #555555;
+    --gris-clair: #F7F7F7;
+    --blanc: #FFFFFF;
+    --bordure: #E0E0E0;
+    --c4: #2E7D32;
+    --c4-clair: #F1F8F1;
+    --c5: #1565C0;
+    --c5-clair: #EEF4FF;
+    --c6: #795548;
+    --c6-clair: #FBF7F5;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--dark);
+    background: #FAFAFA;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    color: var(--blanc);
+    padding: 2rem 3rem;
+    border-bottom: 4px solid #C00000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  header h1 { font-size: 1.6rem; font-weight: 700; }
+  header .sub { font-size: 0.88rem; color: #AAAAAA; margin-top: 0.2rem; }
+  .meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.82rem;
+    color: #AAAAAA;
+    flex-wrap: wrap;
+  }
+  .meta div { display: flex; flex-direction: column; }
+  .meta strong { color: #DDDDDD; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* NAV */
+  nav {
+    background: var(--blanc);
+    border-bottom: 1px solid var(--bordure);
+    padding: 0 3rem;
+    display: flex;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  nav a {
+    display: block;
+    padding: 0.85rem 1.3rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--gris);
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  nav a.c4:hover, nav a.c4.active { border-bottom-color: var(--c4); color: var(--c4); }
+  nav a.c5:hover, nav a.c5.active { border-bottom-color: var(--c5); color: var(--c5); }
+  nav a.c6:hover, nav a.c6.active { border-bottom-color: var(--c6); color: var(--c6); }
+
+  /* MAIN */
+  main { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
+
+  /* SECTION COMPÉTENCE */
+  .competence { margin-bottom: 3.5rem; scroll-margin-top: 64px; }
+
+  .comp-header {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--bordure);
+  }
+  .comp-num {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--blanc);
+    flex-shrink: 0;
+  }
+  .c4 .comp-num { background: var(--c4); }
+  .c5 .comp-num { background: var(--c5); }
+  .c6 .comp-num { background: var(--c6); }
+
+  .comp-info h2 { font-size: 1.15rem; font-weight: 700; color: var(--dark); }
+  .comp-info p  { font-size: 0.85rem; color: var(--gris); margin-top: 0.15rem; }
+
+  /* GRILLE AC */
+  .ac-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .ac {
+    background: var(--blanc);
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .ac-top {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.65rem 1rem;
+  }
+  .c4 .ac-top { background: var(--c4-clair); border-bottom: 1px solid #C8E6C9; }
+  .c5 .ac-top { background: var(--c5-clair); border-bottom: 1px solid #BBDEFB; }
+  .c6 .ac-top { background: var(--c6-clair); border-bottom: 1px solid #D7CCC8; }
+
+  .ac-badge {
+    font-size: 0.72rem; font-weight: 700;
+    color: var(--blanc);
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .c4 .ac-badge { background: var(--c4); }
+  .c5 .ac-badge { background: var(--c5); }
+  .c6 .ac-badge { background: var(--c6); }
+
+  .ac-label { font-size: 0.88rem; font-weight: 600; color: var(--dark); }
+
+  .ac-body { padding: 0.85rem 1rem; font-size: 0.87rem; color: var(--gris); }
+
+  /* PREUVES */
+  .preuves {
+    display: flex; flex-wrap: wrap; gap: 0.35rem;
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--bordure);
+  }
+  .preuve {
+    font-size: 0.72rem; font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+  .c4 .preuve { border-color: var(--c4); color: var(--c4); }
+  .c5 .preuve { border-color: var(--c5); color: var(--c5); }
+  .c6 .preuve { border-color: var(--c6); color: var(--c6); }
+
+  footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #AAAAAA;
+    padding: 2rem;
+    border-top: 1px solid var(--bordure);
+    margin-top: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Portfolio de stage — Mathis Sauquet</h1>
+    <p class="sub">B.U.T. Informatique · Parcours Administration et gestion de bases de données · S6</p>
+  </div>
+  <div class="meta">
+    <div><strong>Structure</strong>CMA France — DSI</div>
+    <div><strong>Période</strong>2 mars – 5 juin 2026</div>
+    <div><strong>Tuteur entreprise</strong>Ferrah Mazigh</div>
+    <div><strong>Tuteur IUT</strong>Belaiche Reda</div>
+  </div>
+</header>
+
+<nav>
+  <a href="#c4" class="c4">Compétence 4 — Gérer des données</a>
+  <a href="#c5" class="c5">Compétence 5 — Conduire un projet</a>
+  <a href="#c6" class="c6">Compétence 6 — Collaborer en équipe</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════ C4 ═══════════════════════════════════════ -->
+<section class="competence c4" id="c4">
+  <div class="comp-header">
+    <div class="comp-num">4</div>
+    <div class="comp-info">
+      <h2>Gérer des données de l'information</h2>
+      <p>Concevoir, gérer, administrer et exploiter les données de l'entreprise</p>
+    </div>
+  </div>
+  <div class="ac-grid">
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC1</span>
+        <span class="ac-label">Interroger et mettre à jour une base de données</span>
+      </div>
+      <div class="ac-body">
+        Interrogation de <code>fc_train</code> (312 000 lignes, PostgreSQL Azure) via psycopg2 et pandas pour l'EDA. Dans le Portail, modèle Django mappé sur table existante (<code>managed = False</code>) — lecture et mise à jour sans modification du schéma.
+        <div class="preuves">
+          <span class="preuve">PostgreSQL Azure</span>
+          <span class="preuve">psycopg2</span>
+          <span class="preuve">Django ORM</span>
+          <span class="preuve">managed = False</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC2</span>
+        <span class="ac-label">Assurer la confidentialité et l'intégrité des données</span>
+      </div>
+      <div class="ac-body">
+        Azure Key Vault sur les deux projets — chaîne de connexion jamais en clair. Suppression logique dans le Portail (<code>techetat = 9</code>) + journalisation systématique dans <code>LogAction</code> avant toute modification.
+        <div class="preuves">
+          <span class="preuve">Azure Key Vault</span>
+          <span class="preuve">Service principal</span>
+          <span class="preuve">Suppression logique</span>
+          <span class="preuve">LogAction</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC3</span>
+        <span class="ac-label">Restituer les données via visualisation et programmation</span>
+      </div>
+      <div class="ac-body">
+        Visualisations EDA (histogrammes, heatmaps, matrices de confusion) avec matplotlib/seaborn dans 4 notebooks. Export CSV filtré par profil utilisateur dans le Portail, champs techniques exclus.
+        <div class="preuves">
+          <span class="preuve">matplotlib / seaborn</span>
+          <span class="preuve">4 notebooks</span>
+          <span class="preuve">Export CSV Django</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC4</span>
+        <span class="ac-label">Appliquer des méthodes d'exploration et d'apprentissage</span>
+      </div>
+      <div class="ac-body">
+        Pipeline ML complet : imputation, LabelEncoder, SMOTE (ratio 0,2 — déséquilibre 25:1), split 70/30, entraînement LR / LightGBM / XGBoost, optimisation par RandomizedSearchCV. Résultat : <strong>XGBoost ROC-AUC 0,97</strong>.
+        <div class="preuves">
+          <span class="preuve">SMOTE</span>
+          <span class="preuve">XGBoost</span>
+          <span class="preuve">RandomizedSearchCV</span>
+          <span class="preuve">ROC-AUC 0,97</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ C5 ═══════════════════════════════════════ -->
+<section class="competence c5" id="c5">
+  <div class="comp-header">
+    <div class="comp-num">5</div>
+    <div class="comp-info">
+      <h2>Conduire un projet</h2>
+      <p>Organiser et piloter un projet informatique pour satisfaire les besoins des utilisateurs</p>
+    </div>
+  </div>
+  <div class="ac-grid">
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC1</span>
+        <span class="ac-label">Appréhender les besoins du client et de l'utilisateur</span>
+      </div>
+      <div class="ac-body">
+        Portail : 2 profils aux droits distincts, suppression sans perte, validations SIRET/CP/nom gérant. IA FC : déséquilibre 25:1 identifié dès l'EDA → décisions de modélisation adaptées (SMOTE, ROC-AUC comme métrique principale).
+        <div class="preuves">
+          <span class="preuve">Analyse du besoin</span>
+          <span class="preuve">Règles de gestion</span>
+          <span class="preuve">Contraintes identifiées</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC2</span>
+        <span class="ac-label">Formaliser les besoins et définir une démarche de suivi</span>
+      </div>
+      <div class="ac-body">
+        Progression structurée validée avec le tuteur à chaque étape : EDA → nettoyage → modélisation → évaluation → refactoring. Chaque étape développée en notebook avant transposition en modules Python de production.
+        <div class="preuves">
+          <span class="preuve">Points tuteur réguliers</span>
+          <span class="preuve">Validation progressive</span>
+          <span class="preuve">Démarche itérative</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC3</span>
+        <span class="ac-label">Identifier les critères de faisabilité</span>
+      </div>
+      <div class="ac-body">
+        Portail : ne pas modifier le schéma existant → <code>managed = False</code>, pas de migrations. IA FC : ratio SMOTE 0,2 pour rester à 360 000 lignes (vs 600 000 en 1:1). Exclusion de <code>fc_nb_apprenants_annuel</code> (fuite de données détectée).
+        <div class="preuves">
+          <span class="preuve">managed = False</span>
+          <span class="preuve">SMOTE ratio 0,2</span>
+          <span class="preuve">Fuite de données évitée</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC4</span>
+        <span class="ac-label">Intégrer un projet dans le système d'information existant</span>
+      </div>
+      <div class="ac-body">
+        Les deux projets s'intègrent dans l'infrastructure Azure de la DSI : même Key Vault, même PostgreSQL, même SSO OIDC. Pipeline CLI deux modes (<code>train</code> / <code>predict</code>) pour un usage futur sans réentraînement.
+        <div class="preuves">
+          <span class="preuve">Infrastructure Azure existante</span>
+          <span class="preuve">SSO OIDC</span>
+          <span class="preuve">CLI train / predict</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ C6 ═══════════════════════════════════════ -->
+<section class="competence c6" id="c6">
+  <div class="comp-header">
+    <div class="comp-num">6</div>
+    <div class="comp-info">
+      <h2>Collaborer au sein d'une équipe informatique</h2>
+      <p>Acquérir les aptitudes nécessaires pour travailler efficacement dans une équipe informatique</p>
+    </div>
+  </div>
+  <div class="ac-grid">
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC1</span>
+        <span class="ac-label">Comprendre la structure de l'informatique dans une organisation</span>
+      </div>
+      <div class="ac-body">
+        Découverte d'une DSI nationale : pilotage de projets pour tout le réseau CMA, maintenance de systèmes existants, sécurisation des infrastructures. Les contraintes organisationnelles (base partagée, SSO centralisé, Key Vault) ont directement impacté mes choix techniques.
+        <div class="preuves">
+          <span class="preuve">DSI nationale</span>
+          <span class="preuve">Infrastructure partagée</span>
+          <span class="preuve">SSO centralisé</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC2</span>
+        <span class="ac-label">Appliquer une démarche pour intégrer une équipe</span>
+      </div>
+      <div class="ac-body">
+        Prise en main autonome de l'environnement (Azure, PyCharm, Git, Django). Respect de l'existant — base de données non modifiable, conventions de code en place. Points réguliers avec le tuteur avant chaque étape.
+        <div class="preuves">
+          <span class="preuve">Prise en main autonome</span>
+          <span class="preuve">Respect de l'existant</span>
+          <span class="preuve">Git / conventions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC3</span>
+        <span class="ac-label">Mobiliser les compétences interpersonnelles</span>
+      </div>
+      <div class="ac-body">
+        Autonomie sur les deux projets tout en sollicitant le tuteur aux moments clés : choix du ratio SMOTE, exclusion d'une table (fuite de données), validation des règles de profils. Résultats communiqués via tableaux comparatifs et README documenté.
+        <div class="preuves">
+          <span class="preuve">Autonomie</span>
+          <span class="preuve">Communication résultats</span>
+          <span class="preuve">Décisions justifiées</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-top">
+        <span class="ac-badge">AC4</span>
+        <span class="ac-label">Rendre compte de son activité professionnelle</span>
+      </div>
+      <div class="ac-body">
+        Code documenté avec docstrings, README complet (installation, configuration, modes CLI). Notebooks Jupyter pour tracer l'analyse. LogAction pour journaliser automatiquement chaque action dans le Portail. Rapports sauvegardés dans <code>reports/</code>.
+        <div class="preuves">
+          <span class="preuve">Docstrings</span>
+          <span class="preuve">README complet</span>
+          <span class="preuve">LogAction</span>
+          <span class="preuve">reports/</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Mathis Sauquet · Stage B.U.T. Informatique S6 · CMA France · 2025-2026
+</footer>
+
+</body>
+</html>
